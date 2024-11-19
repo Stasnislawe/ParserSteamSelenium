@@ -48,3 +48,9 @@ if input_search:
     pages = driver.find_elements("xpath", "//span[@class='market_paging_pagelink']")[-1]
 
     next_page(driver, pages)
+else:
+    dr_click = driver.find_element("xpath", "//span[@id='popularItemsMore']")
+    dr_click.click()
+    pages = driver.find_elements("xpath", "//span[@class='market_paging_pagelink']")[-1]
+    next_page(driver, pages)
+
