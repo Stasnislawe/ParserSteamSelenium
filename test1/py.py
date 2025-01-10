@@ -3,6 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 
+from test1.dataBase import Dbsession
+from test1.table import Parser
+
 service = Service(executable_path=GeckoDriverManager().install())
 options = webdriver.FirefoxOptions()
 options.add_argument("--headless")
@@ -16,6 +19,9 @@ def products_on_page(driver, count):
         dr_price = dr1.find_elements("class name", "normal_price")[1]
         dr_name = dr1.find_element("class name", "market_listing_item_name")
         print(f'{dr_name.text} - {dr_price.text}')
+        tab = Parser(str(dr_name.text), str(dr_price.text))
+        Dbsession.add(tab)
+        Dbsession.commit()
     return print('Всё, страница закончилась')
 
 
