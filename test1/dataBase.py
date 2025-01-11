@@ -1,9 +1,7 @@
 import os
-
 from dotenv import load_dotenv, find_dotenv
 from sqlalchemy.orm import declarative_base
 import sqlalchemy
-from sqlalchemy.orm import sessionmaker, scoped_session
 
 
 class connects():
@@ -30,6 +28,3 @@ db = os.getenv('DB')
 
 conn = connects(user, password, db).connectmethod()
 Base = declarative_base()
-Base.metadata.bind = conn
-Base.metadata.create_all(bind=conn)
-Dbsession = scoped_session(sessionmaker(bind=conn))
